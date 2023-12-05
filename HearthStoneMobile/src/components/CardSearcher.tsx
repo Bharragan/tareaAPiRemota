@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, Text, Image, StyleSheet, ScrollView } from 'react-native'; // Importa ScrollView
 import axios from 'axios';
-
+import { ImageBackground } from 'react-native';
 const CardSearcher: React.FC = () => {
   const [cardName, setCardName] = useState('');
   const [cardInfo, setCardInfo] = useState<any | null>(null);
+  const defaultCardImage = 'https://d15f34w2p8l1cc.cloudfront.net/hearthstone/49eb630950e50aa851fc9d544089d83dea7640324d7728251638b0b5f1642b8e.png';
+
+  
 
   const searchCard = async () => {
     try {
@@ -34,7 +37,7 @@ const CardSearcher: React.FC = () => {
       <Button title="Buscar" onPress={searchCard} />
       {cardInfo && (
         <View style={styles.cardContainer}>
-          <Image source={{ uri: cardInfo.imgGold }} style={styles.cardImage} />
+          <Image source={{ uri: cardInfo.imgGold ? cardInfo.imgGold : defaultCardImage }} style={styles.cardImage} />
           <View style={styles.cardInfoContainer}>
             <Text style={styles.cardTitle}>{cardInfo.name}</Text>
             <Text style={styles.cardText}>{cardInfo.text}</Text>
